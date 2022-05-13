@@ -20,12 +20,20 @@ const GalleryHamster = ({ hamster }: Props) => {
   function hideorShow() {
     setIsClicked(!isClicked)
   }
+
+  function fixImgSrcPath(image: string) {
+    if (image.startsWith('https')) {
+      return image
+    } else {
+      return fixUrl(`/img/${image}`)
+    }
+  }
   return (
     <div onClick={hideorShow} className="GalleryHamster">
       <li key={hamster.id} className="item">
         <img
           className="img"
-          src={fixUrl(`/img/${hamster.imgName}`)}
+          src={fixImgSrcPath(hamster.imgName)}
           alt="hamster poster"
         />
         <section className="hamster-information">

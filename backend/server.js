@@ -41,6 +41,9 @@ app.use('/matches', matches)
 app.use('/matchWinners', matchWinners)
 app.use('/winners', winners)
 app.use('/losers', losers)
+app.all('*', (req, res) => {
+  res.sendFile(staticFolder + 'index.html')
+})
 
 // Starta server
 app.listen(PORT, () => {

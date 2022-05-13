@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
+import { fixUrl } from '../utils'
 import { Hamster } from '../models/Hamster'
 import '../styles/CompetingHamster.css'
 import {
@@ -20,6 +21,14 @@ const CompetingHamster = ({ hamster, setWinner }: Props) => {
     setWinner(true)
   }
 
+  function fixImgSrcPath(image: string) {
+    if (image.startsWith('https')) {
+      return image
+    } else {
+      return fixUrl(`/img/${image}`)
+    }
+  }
+
   return (
     <div className="Competing-hamster">
       <div>
@@ -32,7 +41,7 @@ const CompetingHamster = ({ hamster, setWinner }: Props) => {
         <section>
           <img
             className="img"
-            src={`../../src/assets/images/` + hamster.imgName}
+            src={fixImgSrcPath(hamster.imgName)}
             alt="hamster poster"
           />
         </section>

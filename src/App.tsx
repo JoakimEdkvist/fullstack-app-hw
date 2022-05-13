@@ -26,6 +26,7 @@ function App() {
           <Route path="/statistics" element={<Statistics />}></Route>
           <Route path="/history" element={<History />}></Route>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/*" element={<Home />}></Route>
         </Routes>
       </main>
     </div>

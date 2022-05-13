@@ -16,7 +16,7 @@ const GalleryForm = () => {
   const [formVisible, setFormVisible] = useState<boolean>(false)
 
   const myTransition = useTransition(formVisible, {
-    config: { duration: 300 },
+    config: { duration: 500 },
     from: {
       x: 0,
       y: -50,
