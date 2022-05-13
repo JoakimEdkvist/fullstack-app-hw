@@ -1,0 +1,36 @@
+{
+  "name": "fullstack-app-hamsterwars",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "start": "node backend/server.js",
+    "reset": "node backend/database/resetDatabase.js"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-regular-svg-icons": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@types/react-router-dom": "^5.3.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "firebase": "^9.8.1",
+    "firebase-admin": "^10.2.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "react-spring": "^9.4.5",
+    "recoil": "^0.7.3-alpha.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.7"
+  }
+}

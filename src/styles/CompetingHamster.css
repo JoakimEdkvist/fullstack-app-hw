@@ -1,0 +1,75 @@
+.Competing-hamster {
+  background: rgb(186, 195, 34);
+  background: linear-gradient(
+    112deg,
+    rgba(186, 195, 34, 1) 0%,
+    rgba(253, 128, 45, 1) 100%
+  );
+  width: 250px;
+  height: 400px;
+  border: solid rgb(255, 179, 0) 2px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  box-shadow: 0px 5px 5px rgb(17, 14, 14);
+}
+
+.Competing-hamster .name-experience {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Competing-hamster .lower-card-sections {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Competing-hamster .button-container {
+  height: 40px;
+  width: 40px;
+  border-radius: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(209, 189, 5);
+  text-transform: lowercase;
+  z-index: 1;
+  box-shadow: 0px 5px 5px rgb(17, 14, 14);
+}
+
+.Competing-hamster .button-container:hover {
+  color: rgb(197, 127, 255);
+}
+
+.Competing-hamster .button-container:active {
+  color: rgb(255, 127, 127);
+  box-shadow: 0px 0px 10px rgb(17, 14, 14);
+}
+
+.Competing-hamster .button-container svg {
+  margin-right: 7px;
+}
+
+.Competing-hamster .vote-section {
+  display: flex;
+  align-items: center;
+}
+
+.Competing-hamster .img {
+  width: 220px;
+  height: 150px;
+  border: solid rgb(255, 179, 0) 2px;
+}
+
+.Competing-hamster .line {
+  display: block;
+  width: 200px;
+  height: 1px;
+  margin: auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}

@@ -1,0 +1,63 @@
+.Navbar {
+}
+
+.Navbar nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Navbar .regular-menu {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.Navbar .burger-menu {
+  display: none;
+}
+
+.Navbar .logo img {
+  max-height: 120px;
+}
+
+.Navbar .logo {
+  display: flex;
+  flex-direction: row;
+}
+
+.Navbar section p {
+  font-family: 'Rubik Wet Paint', cursive, Arial, Helvetica, sans-serif;
+  font-size: 2em;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}
+
+@media screen and (max-width: 830px) {
+  .Navbar .regular-menu {
+    display: none;
+  }
+  .Navbar .burger-menu {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+  }
+}
