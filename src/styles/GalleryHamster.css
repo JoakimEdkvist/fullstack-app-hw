@@ -55,3 +55,9 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.GalleryHamster .delete-hamster-field {
+  margin: 10px;
+  border-radius: 5px;
+  color: white;
+}

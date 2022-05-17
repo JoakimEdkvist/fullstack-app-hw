@@ -3,7 +3,8 @@
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  margin: 50px auto;
+  margin: auto;
+  margin-top: 50px;
   width: 80%;
   column-gap: 10px;
   row-gap: 15px;
@@ -61,9 +62,71 @@
   margin-right: 7px;
 }
 
+.Compete .instructions {
+  max-width: 300px;
+}
+
+.after-vote-container {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 50px;
+  width: 80%;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+.hamsters-after-vote {
+  display: flex;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+.after-vote-container .winner {
+  text-align: center;
+  color: rgb(145, 182, 89);
+}
+
+.after-vote-container .loser {
+  text-align: center;
+  color: rgb(177, 45, 45);
+}
+
+.last-section {
+  text-align: center;
+  margin: 20px;
+}
+
+.Compete .last-section .buttons-last-section {
+  display: flex;
+}
+
+.last-section .button-container {
+  text-transform: uppercase;
+  border-radius: 25px;
+  width: 100px;
+  text-decoration: solid;
+  margin: 3px;
+  background-color: rgb(145, 182, 89);
+  color: whitesmoke;
+}
+
+.last-section .link {
+  text-align: center;
+  color: whitesmoke;
+}
+
 @media screen and (max-width: 830px) {
   .Compete .fight-container {
     display: flex;
     flex-direction: column;
+  }
+
+  .hamsters-after-vote {
+    display: block;
   }
 }

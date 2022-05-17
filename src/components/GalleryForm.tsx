@@ -14,6 +14,7 @@ const GalleryForm = () => {
   const [imgName, setImgName] = useState<string>('')
   const [loves, setLoves] = useState<string>('')
   const [formVisible, setFormVisible] = useState<boolean>(false)
+  const [submitting, setSubmitting] = useState<boolean>(false)
 
   const myTransition = useTransition(formVisible, {
     config: { duration: 500 },
@@ -34,33 +35,34 @@ const GalleryForm = () => {
     }
   })
 
-  const [submitting, setSubmitting] = useState<boolean>(false)
+  let object = {
+    name: name,
+    food: food,
+    age: age,
+    games: games,
+    defeats: defeats,
+    wins: wins,
+    imgName: imgName,
+    loves: loves
+  }
+
+  // fungerar som "Computed properties"
+  // const nameIsValid = object.name !== ''
+  // const ageIsValid = object.age >= 0
+  // const formIsValid = nameIsValid && ageIsValid
+  // Detta "måste" kompletteras med användarvänliga felmeddelanden
+
   const handleSubmit = (event: SyntheticEvent) => {
     setSubmitting(true)
-    let object = {
-      name: name,
-      food: food,
-      age: age,
-      games: games,
-      defeats: defeats,
-      wins: wins,
-      imgName: imgName,
-      loves: loves
-    }
-    console.log(object)
 
-    event.preventDefault()
-
-    // const requestOptions = {
+    // fetch(fixUrl('/fruits'), {
     //   method: 'POST',
     //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Bearer my-token',
-    //     'My-Custom-Header': 'Here comes a new hamster'
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
     //   },
-    //   body: JSON.stringify(object)
-    // }
-    // fetch('https://hamsterwars-bend.herokuapp.com/hamsters', requestOptions)
+    //   body: JSON.stringify(fruit)
+    // })
 
     setTimeout(() => {
       setSubmitting(false)

@@ -25,6 +25,13 @@
   margin: 5px;
 }
 
+.Home .intro-links span svg {
+  display: flex;
+}
+.Home .intro-links span h6 {
+  display: flex;
+}
+
 .Home .cutest-section {
   display: flex;
   align-items: center;

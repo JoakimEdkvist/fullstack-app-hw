@@ -6,19 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleInfo,
   faComment,
+  faFaceSadTear,
   faHand,
   faPlus,
+  faSquareXmark,
   faXmark
 } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
   hamster: Hamster
+  trackDeletes: (value: boolean) => void
 }
 
-const GalleryHamster = ({ hamster }: Props) => {
+const GalleryHamster = ({ hamster, trackDeletes }: Props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false)
+  const [enableDelete, setEnableDelete] = useState<boolean>(false)
   function hideorShow() {
-    setIsClicked(!isClicked)
+    setIsClicked(!isClicked) // closing visible card
+    setEnableDelete(false) // set delete checkbox unchecked when closing
   }
 
   function fixImgSrcPath(image: string) {
@@ -28,10 +33,23 @@ const GalleryHamster = ({ hamster }: Props) => {
       return fixUrl(`/img/${image}`)
     }
   }
+
+  const handleDelete = () => {
+    fetch(fixUrl(`/hamsters/${hamster.id}`), {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    trackDeletes(true)
+  }
+
   return (
-    <div onClick={hideorShow} className="GalleryHamster">
+    <div className="GalleryHamster">
       <li key={hamster.id} className="item">
         <img
+          onClick={hideorShow}
           className="img"
           src={fixImgSrcPath(hamster.imgName)}
           alt="hamster poster"
@@ -41,12 +59,16 @@ const GalleryHamster = ({ hamster }: Props) => {
         </section>
         {!isClicked ? (
           <span>
-            <FontAwesomeIcon icon={faCircleInfo} size="lg" />
+            <FontAwesomeIcon
+              onClick={hideorShow}
+              icon={faCircleInfo}
+              size="lg"
+            />
           </span>
         ) : null}
         {isClicked ? (
-          <div onClick={hideorShow} className="info-container">
-            <header className="hamster-information">
+          <div className="info-container">
+            <header onClick={hideorShow} className="hamster-information">
               <h5>{hamster.name}</h5>
               <span>
                 <FontAwesomeIcon icon={faXmark} />
@@ -63,6 +85,16 @@ const GalleryHamster = ({ hamster }: Props) => {
                 matcher.
               </p>
             </section>
+            <div className="delete-hamster-field">
+              <input
+                onChange={() => setEnableDelete(!enableDelete)}
+                type="checkbox"
+                name="delete-check"
+              />
+              <button onClick={handleDelete} disabled={!enableDelete}>
+                Permanent Delete this hamster
+              </button>
+            </div>
           </div>
         ) : null}
       </li>

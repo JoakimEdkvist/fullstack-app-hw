@@ -14,9 +14,10 @@ import {
 interface Props {
   hamster: Hamster
   setWinner: (value: boolean) => void
+  haveVotedOrNot: boolean
 }
 
-const CompetingHamster = ({ hamster, setWinner }: Props) => {
+const CompetingHamster = ({ hamster, setWinner, haveVotedOrNot }: Props) => {
   function handleVote() {
     setWinner(true)
   }
@@ -48,17 +49,22 @@ const CompetingHamster = ({ hamster, setWinner }: Props) => {
         <section>
           <h5>Diet: {hamster.favFood}</h5>
           <span className="line"></span>
-          <div className="lower-card-sections">
-            <section>
-              <h6>Age: {hamster.age}</h6>
-              <h6>Wins: {hamster.wins}</h6>
-              <h6>Defeats: {hamster.defeats}</h6>
-            </section>
-            <section className="vote-section">
-              <section onClick={handleVote} className="button-container">
-                <FontAwesomeIcon icon={faFireFlameCurved} size="lg" />
+          <div>
+            {haveVotedOrNot ? (
+              <section>
+                <h6>Age: {hamster.age}</h6>
+                <h6>Wins: {hamster.wins}</h6>
+                <h6>Defeats: {hamster.defeats}</h6>
               </section>
-            </section>
+            ) : null}
+            {!haveVotedOrNot ? (
+              <section className="vote-section lower-card-sections">
+                <p>Rösta på mig!</p>
+                <section onClick={handleVote} className="button-container">
+                  <FontAwesomeIcon icon={faFireFlameCurved} size="lg" />
+                </section>
+              </section>
+            ) : null}
           </div>
         </section>
       </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import '../styles/Gallery.css'
 import { Hamster } from '../models/Hamster'
+import { fixUrl } from '../utils'
 import HamsterAtom from '../atoms/HamsterAtom'
 import GalleryHamster from './GalleryHamster'
 import GalleryForm from './GalleryForm'
@@ -11,15 +12,13 @@ const Gallery = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [hamsters, setHamsters] = useRecoilState<Hamster[]>(HamsterAtom)
 
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
-  useEffect(() => {
-    fetch(`https://hamsterwars-bend.herokuapp.com/hamsters`)
+  const getData: () => Promise<void> = async () => {
+    fetch(fixUrl(`/hamsters`))
       .then((res) => res.json())
       .then(
         (result) => {
           setIsLoaded(true)
+          setError(null)
           setHamsters(result)
         },
         // Note: it's important to handle errors here
@@ -30,6 +29,14 @@ const Gallery = () => {
           setError(error)
         }
       )
+  }
+
+  function handleDeletes(value: boolean) {
+    getData()
+  }
+
+  useEffect(() => {
+    getData()
   }, [])
 
   return (
@@ -38,7 +45,11 @@ const Gallery = () => {
       {hamsters ? (
         <div className="Grid">
           {hamsters.map((hamster) => (
-            <GalleryHamster key={hamster.id} hamster={hamster} />
+            <GalleryHamster
+              key={hamster.id}
+              hamster={hamster}
+              trackDeletes={handleDeletes}
+            />
           ))}
         </div>
       ) : null}

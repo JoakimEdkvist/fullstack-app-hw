@@ -23,8 +23,7 @@
 }
 
 .Competing-hamster .lower-card-sections {
-  display: flex;
-  justify-content: space-between;
+  height: 100px;
 }
 
 .Competing-hamster .button-container {
@@ -56,6 +55,7 @@
 .Competing-hamster .vote-section {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .Competing-hamster .img {
