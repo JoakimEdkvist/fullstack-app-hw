@@ -3,8 +3,13 @@ import '../styles/GalleryForm.css'
 import { useTransition, animated, config } from 'react-spring'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faSkullCrossbones } from '@fortawesome/free-solid-svg-icons'
+import { fixUrl } from '../utils'
 
-const GalleryForm = () => {
+interface Props {
+  trackBattleJoins: (value: boolean) => void
+}
+
+const GalleryForm = ({ trackBattleJoins }: Props) => {
   const [name, setName] = useState<string>('')
   const [food, setFood] = useState<string>('')
   const [age, setAge] = useState<string>('')
@@ -15,6 +20,8 @@ const GalleryForm = () => {
   const [loves, setLoves] = useState<string>('')
   const [formVisible, setFormVisible] = useState<boolean>(false)
   const [submitting, setSubmitting] = useState<boolean>(false)
+  const [error, setError] = useState<any>(null)
+  const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const myTransition = useTransition(formVisible, {
     config: { duration: 500 },
@@ -35,39 +42,51 @@ const GalleryForm = () => {
     }
   })
 
-  let object = {
+  let newHamster = {
     name: name,
-    food: food,
-    age: age,
-    games: games,
-    defeats: defeats,
-    wins: wins,
+    age: Number(age),
+    favFood: food,
+    games: Number(games),
+    defeats: Number(defeats),
+    wins: Number(wins),
     imgName: imgName,
     loves: loves
   }
 
-  // fungerar som "Computed properties"
-  // const nameIsValid = object.name !== ''
-  // const ageIsValid = object.age >= 0
-  // const formIsValid = nameIsValid && ageIsValid
-  // Detta "måste" kompletteras med användarvänliga felmeddelanden
+  const nameIsValid = newHamster.name !== ''
+  const foodIsValid = newHamster.favFood !== ''
+  const ageIsValid = newHamster.age >= 0 && age !== ''
+  const gamesIsValid = newHamster.games >= 0 && games !== ''
+  const defeatsIsValid = newHamster.defeats >= 0 && defeats !== ''
+  const winsIsValid = newHamster.wins >= 0 && wins !== ''
+  const imgNameIsValid = newHamster.imgName !== ''
+  const lovesIsValid = newHamster.loves !== ''
+  const formIsValid =
+    nameIsValid &&
+    foodIsValid &&
+    ageIsValid &&
+    gamesIsValid &&
+    defeatsIsValid &&
+    winsIsValid &&
+    imgNameIsValid &&
+    lovesIsValid
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  function handleSubmit() {
+    console.log('startar')
+    fetch(fixUrl('/hamsters'), {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newHamster)
+    })
     setSubmitting(true)
-
-    // fetch(fixUrl('/fruits'), {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(fruit)
-    // })
-
     setTimeout(() => {
       setSubmitting(false)
       setFormVisible(!formVisible)
     }, 3000)
+    trackBattleJoins(true)
   }
   return (
     <>
@@ -85,7 +104,7 @@ const GalleryForm = () => {
             {submitting ? (
               <div className="submitted-form">{name} joined the battle!</div>
             ) : (
-              <form className="form-container" onSubmit={handleSubmit}>
+              <form className="form-container">
                 <section className="cross">
                   <FontAwesomeIcon
                     onClick={() => setFormVisible(false)}
@@ -99,18 +118,32 @@ const GalleryForm = () => {
                   </h1>
                 </section>
                 <label>
-                  <h5>Namn:</h5>
+                  <h5>
+                    Namn: <br />
+                    {!nameIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in ett namn
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="name"
                     type="text"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
-                    placeholder="Benny"
+                    placeholder="t.ex Benny"
                     required
                   />
                 </label>
                 <label>
-                  <h5>Favoritmat:</h5>
+                  <h5>
+                    Favoritmat: <br />
+                    {!foodIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in favoritmat
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="food"
                     type="text"
@@ -121,7 +154,14 @@ const GalleryForm = () => {
                   />
                 </label>
                 <label>
-                  <h5> Ålder:</h5>
+                  <h5>
+                    Ålder: <br />
+                    {!ageIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in din ålder
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="age"
                     type="text"
@@ -132,7 +172,14 @@ const GalleryForm = () => {
                   />
                 </label>
                 <label>
-                  <h5>Antal tidigare matcher:</h5>
+                  <h5>
+                    Antal tidigare matcher: <br />
+                    {!gamesIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in tidigare matcher
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="games"
                     type="text"
@@ -143,7 +190,14 @@ const GalleryForm = () => {
                   />
                 </label>
                 <label>
-                  <h5>Vinster:</h5>
+                  <h5>
+                    Vinster: <br />
+                    {!winsIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in tidigare vinster
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="wins"
                     type="text"
@@ -154,7 +208,14 @@ const GalleryForm = () => {
                   />
                 </label>
                 <label>
-                  <h5>Förluster:</h5>
+                  <h5>
+                    Förluster: <br />
+                    {!defeatsIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in tidigare förluster
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="defeats"
                     type="text"
@@ -165,7 +226,14 @@ const GalleryForm = () => {
                   />
                 </label>
                 <label>
-                  <h5>Bildlänk:</h5>
+                  <h5>
+                    Bildlänk: <br />
+                    {!imgNameIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in en https:// länk till din bild
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="imgName"
                     type="text"
@@ -176,7 +244,14 @@ const GalleryForm = () => {
                   />
                 </label>
                 <label>
-                  <h5>Favorit aktivitet:</h5>
+                  <h5>
+                    Favorit aktivitet: <br />
+                    {!lovesIsValid ? (
+                      <span className="form-help-text">
+                        vänligen fyll in favoritaktivitet
+                      </span>
+                    ) : null}
+                  </h5>
                   <input
                     name="loves"
                     type="text"
@@ -187,7 +262,12 @@ const GalleryForm = () => {
                   />
                 </label>
 
-                <button type="submit">
+                <button
+                  disabled={!formIsValid}
+                  onClick={handleSubmit}
+                  type="submit"
+                  className={`${formIsValid ? 'enabled-button' : ''}`}
+                >
                   Join the Battle! <br />
                   <FontAwesomeIcon icon={faSkullCrossbones} />
                 </button>

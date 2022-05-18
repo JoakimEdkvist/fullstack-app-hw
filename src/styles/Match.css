@@ -1,0 +1,17 @@
+.Match {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+.Match .Winner {
+  width: 200px;
+  background-color: green;
+}
+
+.Match .Loser {
+  width: 200px;
+  background-color: red;
+}

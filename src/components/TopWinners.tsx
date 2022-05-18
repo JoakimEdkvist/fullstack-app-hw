@@ -1,19 +1,14 @@
-import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import '../styles/Gallery.css'
 import { Hamster } from '../models/Hamster'
 import { fixUrl } from '../utils'
-import HamsterAtom from '../atoms/HamsterAtom'
+import { useEffect, useState } from 'react'
 import GalleryHamster from './GalleryHamster'
-import GalleryForm from './GalleryForm'
 
-const Gallery = () => {
+const TopWinners = () => {
   const [error, setError] = useState<any>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
-  const [hamsters, setHamsters] = useRecoilState<Hamster[]>(HamsterAtom)
-
+  const [hamsters, setHamsters] = useState<Hamster[]>()
   const getData: () => Promise<void> = async () => {
-    fetch(fixUrl(`/hamsters`))
+    fetch(fixUrl(`/winners`))
       .then((res) => res.json())
       .then(
         (result) => {
@@ -30,22 +25,16 @@ const Gallery = () => {
         }
       )
   }
+  useEffect(() => {
+    getData()
+  }, [])
 
   function handleDeletes(value: boolean) {
     getData()
   }
 
-  function handleJoins(value: boolean) {
-    getData()
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
-
   return (
-    <div className="Gallery">
-      <GalleryForm trackBattleJoins={handleJoins} />
+    <div>
       {hamsters ? (
         <div className="Grid">
           {hamsters.map((hamster) => (
@@ -61,4 +50,4 @@ const Gallery = () => {
   )
 }
 
-export default Gallery
+export default TopWinners
