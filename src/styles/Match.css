@@ -4,14 +4,51 @@
   align-items: center;
   column-gap: 10px;
   row-gap: 15px;
+  margin: 20px;
+  background: -webkit-linear-gradient(
+    rgb(228, 227, 227, 0.5) 0%,
+    rgb(148, 147, 147, 0.5) 80%
+  );
+  border-radius: 20px;
 }
 
-.Match .Winner {
-  width: 200px;
-  background-color: green;
+.Match span {
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background-color: rgb(7, 113, 205);
 }
 
+.Match .Winner,
 .Match .Loser {
   width: 200px;
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Match .Winner h5 {
+  font-size: 2em;
+  font-variant: small-caps;
+  background: -webkit-linear-gradient(
+    rgb(230, 222, 60) 0%,
+    rgb(14, 178, 22) 50%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 1px rgb(162, 154, 2);
+  -webkit-text-fill-color: transparent;
+}
+
+.Match .Loser h5 {
+  font-size: 2em;
+  font-variant: small-caps;
+  background: -webkit-linear-gradient(
+    rgb(230, 222, 60) 0%,
+    rgb(172, 27, 35) 50%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 1px rgb(118, 117, 117);
+  -webkit-text-fill-color: transparent;
 }

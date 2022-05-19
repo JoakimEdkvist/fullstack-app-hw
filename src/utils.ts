@@ -6,4 +6,12 @@ function fixUrl(url: string): string {
   }
 }
 
-export { fixUrl }
+function fixImgSrcPath(image: string) {
+  if (image.startsWith('https')) {
+    return image
+  } else {
+    return fixUrl(`/img/${image}`)
+  }
+}
+
+export { fixUrl, fixImgSrcPath }

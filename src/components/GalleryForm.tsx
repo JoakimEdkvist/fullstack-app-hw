@@ -53,13 +53,18 @@ const GalleryForm = ({ trackBattleJoins }: Props) => {
     loves: loves
   }
 
+  function urlLeadsToImage(url: string) {
+    return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url)
+  }
+
   const nameIsValid = newHamster.name !== ''
   const foodIsValid = newHamster.favFood !== ''
   const ageIsValid = newHamster.age >= 0 && age !== ''
   const gamesIsValid = newHamster.games >= 0 && games !== ''
   const defeatsIsValid = newHamster.defeats >= 0 && defeats !== ''
   const winsIsValid = newHamster.wins >= 0 && wins !== ''
-  const imgNameIsValid = newHamster.imgName !== ''
+  const imgNameIsValid =
+    urlLeadsToImage(newHamster.imgName) && imgName.startsWith('http')
   const lovesIsValid = newHamster.loves !== ''
   const formIsValid =
     nameIsValid &&
@@ -227,7 +232,8 @@ const GalleryForm = ({ trackBattleJoins }: Props) => {
                 </label>
                 <label>
                   <h5>
-                    Bildlänk: <br />
+                    Bildlänk: jpg,jpeg,png,webp,avif,gif,svg
+                    <br />
                     {!imgNameIsValid ? (
                       <span className="form-help-text">
                         vänligen fyll in en https:// länk till din bild

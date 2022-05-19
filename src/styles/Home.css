@@ -9,6 +9,15 @@
   row-gap: 15px;
 }
 
+.Home h1 {
+  text-transform: uppercase;
+  background-clip: border-box;
+  background-color: rgb(3, 3, 4);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0.7px rgb(213, 213, 213);
+  -webkit-text-fill-color: transparent;
+}
+
 .Home .introduction {
   display: flex;
 }

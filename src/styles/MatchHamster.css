@@ -1,0 +1,24 @@
+.match-hamster {
+  display: block;
+  text-align: center;
+}
+
+.match-hamster .image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid rgb(124, 6, 6);
+}
+
+.match-hamster h6 {
+  font-size: 1.5em;
+  text-transform: uppercase;
+  background: -webkit-linear-gradient(
+    rgb(230, 222, 60) 0%,
+    rgb(7, 113, 205) 50%
+  );
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0.5px rgb(249, 243, 243);
+  -webkit-text-fill-color: transparent;
+}

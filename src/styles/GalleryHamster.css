@@ -49,10 +49,15 @@
 }
 
 .Home .GalleryHamster .item h3 {
+  font-size: 1.5em;
   text-transform: uppercase;
-  font-size: 2em;
-  background: -webkit-linear-gradient(rgb(194, 42, 0) 0%, rgb(5, 5, 5) 100%);
+  background: -webkit-linear-gradient(
+    rgb(230, 222, 60) 0%,
+    rgb(7, 113, 205) 50%
+  );
+  background-clip: border-box;
   -webkit-background-clip: text;
+  -webkit-text-stroke: 0.5px rgb(249, 243, 243);
   -webkit-text-fill-color: transparent;
 }
 
