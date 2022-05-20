@@ -12,6 +12,17 @@ const History = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [matches, setMatches] = useState<OneMatch[]>()
   const [hamsters, setHamsters] = useRecoilState<Hamster[]>(HamsterAtom)
+  const [matchToBeDeleted, setMatchToBeDeleted] = useState<OneMatch | null>(
+    null
+  )
+
+  if (matchToBeDeleted !== null) {
+    let newMatches = matches?.filter(
+      (match) => match.id !== matchToBeDeleted.id
+    )
+    setMatches(newMatches)
+    setMatchToBeDeleted(null)
+  }
 
   const getData: () => Promise<void> = async () => {
     fetch(fixUrl(`/matches`))
@@ -51,14 +62,14 @@ const History = () => {
   }
   useEffect(() => {
     updateRecoilHamsters()
-    console.log(matches)
     getData()
-    console.log(matches)
   }, [])
 
-  function handleDeletes() {
-    getData()
-  }
+  // function handleDeletes(match: OneMatch) {
+  //   console.log(match)
+  //   return match
+  //   // getData()
+  // }
 
   return (
     <>
@@ -66,7 +77,11 @@ const History = () => {
         <div className="History">
           <h1>Match historik</h1>
           {matches.map((match) => (
-            <Match key={match.id} match={match} trackDeletes={getData} />
+            <Match
+              key={match.id}
+              match={match}
+              setMatchToBeDeleted={setMatchToBeDeleted}
+            />
           ))}
         </div>
       ) : null}

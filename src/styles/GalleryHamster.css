@@ -20,28 +20,30 @@
     rgba(252, 252, 144, 1) 100%
   );
   position: absolute;
-  /* top: 50%; */
   left: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
   border: solid white 3px;
   border-radius: 25px;
   max-width: 300px;
   z-index: 10;
-  /* clip-path: polygon(
-    0 30%,
-    65% 21%,
-    22% 5%,
-    100% 6%,
-    100% 30%,
-    100% 100%,
-    0 100%
-  ); */
   font-size: 1rem;
+  box-shadow: 0px 5px 5px rgb(17, 14, 14);
 }
 
-.GalleryHamster p,
 .GalleryHamster header {
   margin: 15px;
+}
+
+.GalleryHamster .hamster-information h5 {
+  margin: auto;
+  font-size: large;
+}
+
+.GalleryHamster p {
+  margin: 15px;
+  font-weight: 500;
+  font-style: italic;
 }
 
 .Home .GalleryHamster img {
@@ -61,8 +63,38 @@
   -webkit-text-fill-color: transparent;
 }
 
+.GalleryHamster .delete-btn {
+  background-color: rgb(175, 42, 49);
+  color: whitesmoke;
+}
+
+.GalleryHamster button {
+  text-transform: uppercase;
+  border-radius: 5px;
+  height: 30px;
+}
+
+.GalleryHamster .error {
+  padding: 15px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.GalleryHamster .open-statistics button {
+  background-color: rgb(105, 174, 126);
+  color: whitesmoke;
+  font-weight: bold;
+}
+
 .GalleryHamster .delete-hamster-field {
+  display: flex;
+  justify-content: space-between;
   margin: 10px;
   border-radius: 5px;
-  color: white;
+}
+
+@media screen and (max-width: 500px) {
+  .GalleryHamster .delete-hamster-field {
+    display: block;
+  }
 }

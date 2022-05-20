@@ -3,6 +3,7 @@ import { fixUrl } from '../utils'
 import { useRecoilState } from 'recoil'
 import '../styles/Home.css'
 import { Hamster } from '../models/Hamster'
+import HamsterAtom from '../atoms/HamsterAtom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowPointer,
@@ -17,6 +18,7 @@ const Home = () => {
   const [error, setError] = useState<any>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [cutestHamster, setCutestHamster] = useState<Hamster[]>()
+  const [hamsters, setHamsters] = useRecoilState<Hamster[]>(HamsterAtom)
 
   // Note: the empty deps array [] means
   // this useEffect will run once
@@ -55,6 +57,24 @@ const Home = () => {
   }
 
   useEffect(() => {
+    if (hamsters.length === 0) {
+      fetch(fixUrl(`/hamsters`))
+        .then((res) => res.json())
+        .then(
+          (result) => {
+            setIsLoaded(true)
+            setError(null)
+            setHamsters(result)
+          },
+          // Note: it's important to handle errors here
+          // instead of a catch() block so that we don't swallow
+          // exceptions from actual bugs in components.
+          (error) => {
+            setIsLoaded(true)
+            setError(error)
+          }
+        )
+    }
     getData()
   }, [])
 

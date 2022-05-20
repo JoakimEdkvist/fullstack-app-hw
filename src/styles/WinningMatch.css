@@ -1,0 +1,19 @@
+.winning-match {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.winning-match h5 {
+  width: 50px;
+  text-align: center;
+  margin: auto;
+}
+
+.winning-match .winner {
+  color: green;
+}
+
+.winning-match .loser {
+  color: rgb(128, 0, 17);
+}

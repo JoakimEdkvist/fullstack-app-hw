@@ -3,16 +3,18 @@ import { OneMatch } from '../models/OneMatch'
 import { fixUrl } from '../utils'
 import MatchHamster from './MatchHamster'
 import '../styles/Match.css'
+import { MatchProp } from 'react-spring'
 
 interface Props {
   match: OneMatch
-  trackDeletes: (value: boolean) => void
+  setMatchToBeDeleted: (match: OneMatch) => void
 }
 
-const Match = ({ match, trackDeletes }: Props) => {
+const Match = ({ match, setMatchToBeDeleted }: Props) => {
   const [enableDelete, setEnableDelete] = useState<boolean>(false)
 
   const handleDelete = () => {
+    setMatchToBeDeleted(match) // ta bort matchen lokalt i matcher
     fetch(fixUrl(`/matches/${match.id}`), {
       method: 'DELETE',
       headers: {
@@ -20,7 +22,6 @@ const Match = ({ match, trackDeletes }: Props) => {
         'Content-Type': 'application/json'
       }
     })
-    trackDeletes(true)
   }
 
   return (
@@ -31,19 +32,25 @@ const Match = ({ match, trackDeletes }: Props) => {
           type="checkbox"
           name="delete-check"
         />
-        <button onClick={handleDelete} disabled={!enableDelete}>
-          Permanent Delete this Match History
+        <button
+          className={enableDelete ? 'delete-btn' : ''}
+          onClick={handleDelete}
+          disabled={!enableDelete}
+        >
+          Delete Match
         </button>
       </div>
-      <div className="Winner">
-        <h5>Winner</h5>
-        <MatchHamster hamsterId={match.winnerId} />
-      </div>
-      <span></span>
-      <div className="Loser">
-        <h5>Loser</h5>
-        <MatchHamster hamsterId={match.loserId} />
-      </div>
+      <section>
+        <div className="Winner">
+          <h5>Winner</h5>
+          <MatchHamster hamsterId={match.winnerId} />
+        </div>
+        <span></span>
+        <div className="Loser">
+          <h5>Loser</h5>
+          <MatchHamster hamsterId={match.loserId} />
+        </div>
+      </section>
     </div>
   )
 }
