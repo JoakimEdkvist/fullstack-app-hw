@@ -33,9 +33,6 @@ const History = () => {
           setError(null)
           setMatches(result)
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true)
           setError(error)
@@ -51,9 +48,6 @@ const History = () => {
           setError(null)
           setHamsters(result)
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true)
           setError(error)
@@ -64,12 +58,6 @@ const History = () => {
     updateRecoilHamsters()
     getData()
   }, [])
-
-  // function handleDeletes(match: OneMatch) {
-  //   console.log(match)
-  //   return match
-  //   // getData()
-  // }
 
   return (
     <>
@@ -84,7 +72,12 @@ const History = () => {
             />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <h2>
+          Vi försökte hitta historik för alla matcher men något gick fel tyvärr,
+          försök senare.
+        </h2>
+      )}
     </>
   )
 }

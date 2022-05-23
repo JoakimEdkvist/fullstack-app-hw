@@ -1,15 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useEffect, useState } from 'react'
 import { fixUrl } from '../utils'
 import { Hamster } from '../models/Hamster'
 import '../styles/CompetingHamster.css'
-import {
-  faArrowPointer,
-  faFire,
-  faFireFlameCurved,
-  faHeart,
-  faPeopleGroup
-} from '@fortawesome/free-solid-svg-icons'
+import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
   hamster: Hamster
@@ -36,7 +29,7 @@ const CompetingHamster = ({ hamster, setWinner, haveVotedOrNot }: Props) => {
         <section className="name-experience">
           <h3>{hamster.name}</h3>
           <div>
-            <h6>Experience: {hamster.games}</h6>
+            <h6>Matcher: {hamster.games}</h6>
           </div>
         </section>
         <section>
@@ -46,15 +39,15 @@ const CompetingHamster = ({ hamster, setWinner, haveVotedOrNot }: Props) => {
             alt="hamster poster"
           />
         </section>
-        <section>
+        <section className="info">
           <h5>Diet: {hamster.favFood}</h5>
           <span className="line"></span>
           <div>
             {haveVotedOrNot ? (
               <section>
-                <h6>Age: {hamster.age}</h6>
-                <h6>Wins: {hamster.wins}</h6>
-                <h6>Defeats: {hamster.defeats}</h6>
+                <h4>Ålder: {hamster.age}</h4>
+                <h4>Vinster: {hamster.wins}</h4>
+                <h4>Förluster: {hamster.defeats}</h4>
               </section>
             ) : null}
             {!haveVotedOrNot ? (

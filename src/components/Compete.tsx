@@ -39,9 +39,6 @@ const Compete = () => {
           setFirstRandomHamster(result)
           setFirstIsWinner(false)
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true)
           setError(error)
@@ -106,13 +103,8 @@ const Compete = () => {
         body: JSON.stringify(updatedHamster)
       })
     }
-
     postMatchResultFirstWinner()
     setHaveVoted(true)
-
-    //efter uppdaterings post fetch
-    // setFirstIsWinner(false)
-    // setSecondIsWinner(false)
   }
   function handleSecondIsWinner(value: boolean) {
     setFirstIsWinner(false)
@@ -153,10 +145,6 @@ const Compete = () => {
 
     postMatchResultSecondWinner()
     setHaveVoted(true)
-
-    //efter uppdaterings post fetch
-    // setFirstIsWinner(false)
-    // setSecondIsWinner(false)
   }
 
   function postMatchResultFirstWinner() {
@@ -195,7 +183,7 @@ const Compete = () => {
             {firstIsWinner && (
               <>
                 <div className="winner">
-                  <h1>The Winner is</h1>
+                  <h1>Vinnaren</h1>
                   <CompetingHamster
                     haveVotedOrNot={haveVoted}
                     setWinner={handleFirstIsWinner}
@@ -203,7 +191,7 @@ const Compete = () => {
                   />
                 </div>
                 <div className="loser">
-                  <h1>The Loser is</h1>
+                  <h1>Förloraren</h1>
                   <CompetingHamster
                     haveVotedOrNot={haveVoted}
                     setWinner={handleSecondIsWinner}
@@ -215,7 +203,7 @@ const Compete = () => {
             {secondIsWinner && (
               <>
                 <div className="winner">
-                  <h1>The Winner is</h1>
+                  <h1>Vinnaren</h1>
                   <CompetingHamster
                     haveVotedOrNot={haveVoted}
                     setWinner={handleSecondIsWinner}
@@ -223,7 +211,7 @@ const Compete = () => {
                   />
                 </div>
                 <div className="loser">
-                  <h1>The Loser is</h1>
+                  <h1>Förloraren</h1>
                   <CompetingHamster
                     haveVotedOrNot={haveVoted}
                     setWinner={handleFirstIsWinner}
@@ -234,7 +222,7 @@ const Compete = () => {
             )}
           </div>
           <div className="last-section">
-            <h5>Vill du rösta på fler champions?</h5>
+            <h5>Vill du rösta på fler hamsters?</h5>
             <section className="buttons-last-section">
               <button
                 onClick={handleFinishedVoting}
@@ -280,8 +268,8 @@ const Compete = () => {
           <div className="instructions">
             <h2>Instruktioner</h2>
             <p>
-              Klicka på respektive knapp för att rösta på den hamster som du
-              tycker förtjänar att vinna!
+              Klicka på respektive hamster's flamma för att rösta på den hamster
+              som du tycker förtjänar att vinna!
             </p>
             <section className="button-container">
               <FontAwesomeIcon icon={faFireFlameCurved} size="lg" />

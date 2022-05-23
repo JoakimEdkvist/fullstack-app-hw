@@ -11,6 +11,7 @@ const Gallery = () => {
   const [error, setError] = useState<any>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [hamsters, setHamsters] = useRecoilState<Hamster[]>(HamsterAtom)
+  const [haveJoined, setHaveJoined] = useState<boolean>(false)
 
   const getData: () => Promise<void> = async () => {
     fetch(fixUrl(`/hamsters`))
@@ -21,42 +22,37 @@ const Gallery = () => {
           setError(null)
           setHamsters(result)
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true)
           setError(error)
         }
       )
-  }
-
-  function handleDeletes(value: boolean) {
-    getData()
-  }
-
-  function handleJoins(value: boolean) {
-    getData()
+    setHaveJoined(false)
   }
 
   useEffect(() => {
     getData()
   }, [])
 
+  useEffect(() => {
+    getData()
+  }, [haveJoined])
+
   return (
     <div className="Gallery">
-      <GalleryForm trackBattleJoins={handleJoins} />
+      <GalleryForm setHaveJoined={setHaveJoined} />
       {hamsters ? (
         <div className="Grid">
           {hamsters.map((hamster) => (
-            <GalleryHamster
-              key={hamster.id}
-              hamster={hamster}
-              trackDeletes={handleDeletes}
-            />
+            <GalleryHamster key={hamster.id} hamster={hamster} />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <h2>
+          Vi försökte hitta alla hamstrar men något gick fel tyvärr, försök
+          senare.
+        </h2>
+      )}
     </div>
   )
 }

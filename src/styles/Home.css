@@ -39,6 +39,15 @@
 }
 .Home .intro-links span h6 {
   display: flex;
+  text-transform: uppercase;
+}
+
+.Home .intro-text {
+  font-weight: 600;
+}
+
+.Home .intro-text li {
+  font-style: italic;
 }
 
 .Home .cutest-section {
@@ -56,6 +65,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loader {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border-top: 8px solid rgba(255, 255, 255, 1);
+  border-left: 8px solid rgba(255, 255, 255, 1);
+  border-right: 8px solid rgba(255, 255, 255, 0);
+  animation: spin 0.7s infinite linear;
 }
 
 /* @media screen and (max-width: 1200px) {

@@ -6,11 +6,11 @@ const Statistics = () => {
   return (
     <div className="Statistics">
       <div>
-        <h2 className="winners">Top 5 Winners</h2>
+        <h2 className="winners">Topp 5 Vinnare</h2>
         <TopWinners />
       </div>
       <div>
-        <h2 className="losers">Top 5 Losers</h2>
+        <h2 className="losers">Topp 5 Förlorare</h2>
         <TopLosers />
       </div>
     </div>

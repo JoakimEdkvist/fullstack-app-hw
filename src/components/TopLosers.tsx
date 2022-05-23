@@ -17,9 +17,6 @@ const TopLosers = () => {
           setError(null)
           setHamsters(result)
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true)
           setError(error)
@@ -46,7 +43,12 @@ const TopLosers = () => {
             />
           ))}
         </div>
-      ) : null}
+      ) : (
+        <h2>
+          Vi försökte hitta de 5 bästa förlorarna men något gick fel tyvärr,
+          försök senare.
+        </h2>
+      )}
     </div>
   )
 }

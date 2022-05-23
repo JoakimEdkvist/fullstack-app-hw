@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Hamster } from '../models/Hamster'
 import { OneMatch } from '../models/OneMatch'
 import { fixUrl } from '../utils'
@@ -6,27 +6,25 @@ import '../styles/GalleryHamster.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleInfo,
-  faComment,
-  faFaceSadTear,
-  faHand,
   faPlus,
-  faSquareXmark,
   faXmark
 } from '@fortawesome/free-solid-svg-icons'
+import { useRecoilState } from 'recoil'
+import HamsterAtom from '../atoms/HamsterAtom'
 import WinningMatch from './WinningMatch'
 
 interface Props {
   hamster: Hamster
-  trackDeletes: (value: boolean) => void
 }
 
-const GalleryHamster = ({ hamster, trackDeletes }: Props) => {
+const GalleryHamster = ({ hamster }: Props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false)
   const [enableDelete, setEnableDelete] = useState<boolean>(false)
   const [openStats, setOpenStats] = useState<boolean>(false)
   const [error, setError] = useState<any>(null)
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [wonMatches, setWonMatches] = useState<OneMatch[] | null>(null)
+  const [hamsters, setHamsters] = useRecoilState<Hamster[]>(HamsterAtom)
 
   function hideorShow() {
     setIsClicked(!isClicked) // closing visible card
@@ -53,9 +51,6 @@ const GalleryHamster = ({ hamster, trackDeletes }: Props) => {
             console.log(result)
             setWonMatches(result)
           },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
           (error) => {
             setIsLoaded(true)
             setError(error)
@@ -75,9 +70,16 @@ const GalleryHamster = ({ hamster, trackDeletes }: Props) => {
         'Content-Type': 'application/json'
       }
     })
-    trackDeletes(true)
-  }
 
+    let HamsterToBeDeleted = hamster.id
+    let newHamsters = hamsters?.filter(
+      (hamster) => hamster.id !== HamsterToBeDeleted
+    )
+    console.log(hamsters)
+    setHamsters(newHamsters)
+    console.log(hamsters)
+  }
+  //
   return (
     <div className="GalleryHamster">
       <li key={hamster.id} className="item">
@@ -91,7 +93,7 @@ const GalleryHamster = ({ hamster, trackDeletes }: Props) => {
           <h3>{hamster.name}</h3>
         </section>
         {!isClicked ? (
-          <span>
+          <span className="icon">
             <FontAwesomeIcon
               onClick={hideorShow}
               icon={faCircleInfo}
@@ -103,7 +105,7 @@ const GalleryHamster = ({ hamster, trackDeletes }: Props) => {
           <div className="info-container">
             <header onClick={hideorShow} className="hamster-information">
               <h5>{hamster.name}</h5>
-              <span>
+              <span className="icon">
                 <FontAwesomeIcon icon={faXmark} />
               </span>
             </header>
@@ -131,12 +133,12 @@ const GalleryHamster = ({ hamster, trackDeletes }: Props) => {
                   onClick={handleDelete}
                   disabled={!enableDelete}
                 >
-                  Delete hamster
+                  ta bort hamster
                 </button>
               </section>
               <section className="open-statistics">
                 <button onClick={handleShowStats}>
-                  STATS{'  '}
+                  STATISTIK{'  '}
                   {!openStats ? (
                     <FontAwesomeIcon icon={faPlus} />
                   ) : (

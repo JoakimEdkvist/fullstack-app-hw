@@ -10,6 +10,11 @@
   border-radius: 75px;
   z-index: 1;
   box-shadow: 0px 5px 5px rgb(17, 14, 14);
+  cursor: pointer;
+}
+
+.GalleryHamster .icon {
+  cursor: pointer;
 }
 
 .GalleryHamster .info-container {
@@ -48,6 +53,7 @@
 
 .Home .GalleryHamster img {
   border: solid rgb(255, 179, 0) 2px;
+  cursor: pointer;
 }
 
 .Home .GalleryHamster .item h3 {
@@ -66,6 +72,7 @@
 .GalleryHamster .delete-btn {
   background-color: rgb(175, 42, 49);
   color: whitesmoke;
+  cursor: pointer;
 }
 
 .GalleryHamster button {
@@ -84,6 +91,7 @@
   background-color: rgb(105, 174, 126);
   color: whitesmoke;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .GalleryHamster .delete-hamster-field {
@@ -93,7 +101,7 @@
   border-radius: 5px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .GalleryHamster .delete-hamster-field {
     display: block;
   }

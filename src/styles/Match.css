@@ -37,6 +37,7 @@
 .Match .delete-btn {
   background-color: rgb(175, 42, 49);
   color: whitesmoke;
+  cursor: pointer;
 }
 
 .Match .Winner,

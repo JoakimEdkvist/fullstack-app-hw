@@ -1,15 +1,15 @@
 import { SyntheticEvent, useState } from 'react'
 import '../styles/GalleryForm.css'
-import { useTransition, animated, config } from 'react-spring'
+import { useTransition, animated } from 'react-spring'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faSkullCrossbones } from '@fortawesome/free-solid-svg-icons'
 import { fixUrl } from '../utils'
 
 interface Props {
-  trackBattleJoins: (value: boolean) => void
+  setHaveJoined: (value: boolean) => void
 }
 
-const GalleryForm = ({ trackBattleJoins }: Props) => {
+const GalleryForm = ({ setHaveJoined }: Props) => {
   const [name, setName] = useState<string>('')
   const [food, setFood] = useState<string>('')
   const [age, setAge] = useState<string>('')
@@ -77,7 +77,6 @@ const GalleryForm = ({ trackBattleJoins }: Props) => {
     lovesIsValid
 
   function handleSubmit() {
-    console.log('startar')
     fetch(fixUrl('/hamsters'), {
       method: 'POST',
       headers: {
@@ -91,7 +90,7 @@ const GalleryForm = ({ trackBattleJoins }: Props) => {
       setSubmitting(false)
       setFormVisible(!formVisible)
     }, 3000)
-    trackBattleJoins(true)
+    setHaveJoined(true)
   }
   return (
     <>
@@ -102,12 +101,12 @@ const GalleryForm = ({ trackBattleJoins }: Props) => {
             onClick={() => setFormVisible(!formVisible)}
             className="showFormButton"
           >
-            <h3>Join Battle</h3>
+            <h3>Ny Hamster?</h3>
           </animated.div>
         ) : (
           <animated.div style={style} className="GalleryForm">
             {submitting ? (
-              <div className="submitted-form">{name} joined the battle!</div>
+              <div className="submitted-form">{name} har anslutit!</div>
             ) : (
               <form className="form-container">
                 <section className="cross">
@@ -274,7 +273,7 @@ const GalleryForm = ({ trackBattleJoins }: Props) => {
                   type="submit"
                   className={`${formIsValid ? 'enabled-button' : ''}`}
                 >
-                  Join the Battle! <br />
+                  Lägg till Hamster! <br />
                   <FontAwesomeIcon icon={faSkullCrossbones} />
                 </button>
               </form>

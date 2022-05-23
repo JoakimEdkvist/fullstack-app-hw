@@ -16,9 +16,9 @@ const MatchHamster = ({ hamsterId }: Props) => {
   const [theHamster, setTheHamster] = useState<Hamster>()
 
   useEffect(() => {
+    //hitta rätt hamster i hamsters i recoilstate
     let obj: Hamster | undefined = hamsters.find((h) => h.id === hamsterId)
     setTheHamster(obj)
-    // console.log(theHamster)
   }, [])
 
   return (
@@ -32,7 +32,12 @@ const MatchHamster = ({ hamsterId }: Props) => {
           />
           <h6>{theHamster.name}</h6>
         </div>
-      ) : null}
+      ) : (
+        <h2>
+          Vi försökte hitta en hamster som ville tävla men något gick fel
+          tyvärr, försök senare.
+        </h2>
+      )}
     </div>
   )
 }

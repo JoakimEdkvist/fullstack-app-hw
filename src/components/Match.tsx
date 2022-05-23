@@ -37,17 +37,17 @@ const Match = ({ match, setMatchToBeDeleted }: Props) => {
           onClick={handleDelete}
           disabled={!enableDelete}
         >
-          Delete Match
+          Radera Match
         </button>
       </div>
       <section>
         <div className="Winner">
-          <h5>Winner</h5>
+          <h5>Vinnare</h5>
           <MatchHamster hamsterId={match.winnerId} />
         </div>
         <span></span>
         <div className="Loser">
-          <h5>Loser</h5>
+          <h5>Förlorare</h5>
           <MatchHamster hamsterId={match.loserId} />
         </div>
       </section>

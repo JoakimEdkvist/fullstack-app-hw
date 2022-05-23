@@ -64,6 +64,9 @@
 
 .Compete .instructions {
   max-width: 300px;
+  font-weight: 600;
+  text-align: center;
+  font-style: italic;
 }
 
 .after-vote-container {
@@ -88,12 +91,20 @@
 
 .after-vote-container .winner {
   text-align: center;
-  color: rgb(145, 182, 89);
+  text-transform: uppercase;
+  color: rgb(2, 164, 53);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0.5px rgb(21, 16, 16);
 }
 
 .after-vote-container .loser {
   text-align: center;
-  color: rgb(177, 45, 45);
+  text-transform: uppercase;
+  color: rgb(226, 43, 46);
+  background-clip: border-box;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 0.5px rgb(21, 16, 16);
 }
 
 .last-section {
@@ -113,6 +124,7 @@
   margin: 3px;
   background-color: rgb(145, 182, 89);
   color: whitesmoke;
+  cursor: pointer;
 }
 
 .last-section .link {
@@ -120,7 +132,7 @@
   color: whitesmoke;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 850px) {
   .Compete .fight-container {
     display: flex;
     flex-direction: column;

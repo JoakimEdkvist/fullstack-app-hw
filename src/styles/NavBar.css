@@ -3,7 +3,7 @@
 
 .Navbar nav {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -11,6 +11,7 @@
   list-style-type: none;
   display: flex;
   flex-direction: row;
+  animation: slide-nav 1s;
 }
 
 .Navbar .burger-menu {
@@ -18,7 +19,8 @@
 }
 
 .Navbar .logo img {
-  max-height: 120px;
+  max-height: 80px;
+  padding: 20px;
 }
 
 .Navbar .logo {
@@ -39,25 +41,61 @@ a:active {
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
+  font-weight: 600;
+  text-shadow: 1px 1px #9e9e9e;
+  cursor: pointer;
+}
+
+.burger {
+  cursor: pointer;
+  padding: 20px;
 }
 
 .bar {
   display: block;
-  width: 25px;
+  width: 30px;
   height: 3px;
-  margin: 5px auto;
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  margin: 5px 0;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   background-color: #101010;
 }
 
-@media screen and (max-width: 830px) {
+.hide {
+  opacity: 0;
+}
+
+.first {
+  -webkit-transform: rotate(-45deg) translate(-5px, 6px);
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.third {
+  -webkit-transform: rotate(45deg) translate(-5px, -6px);
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+@keyframes slide-nav {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 850px) {
   .Navbar .regular-menu {
     display: none;
   }
   .Navbar .burger-menu {
     list-style-type: none;
     display: flex;
+    position: absolute;
+    top: 100px;
+    right: 0;
     flex-direction: column;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 }

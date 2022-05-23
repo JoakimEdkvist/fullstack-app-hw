@@ -20,10 +20,9 @@ const Home = () => {
   const [cutestHamster, setCutestHamster] = useState<Hamster[]>()
   const [hamsters, setHamsters] = useRecoilState<Hamster[]>(HamsterAtom)
 
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
   const getData: () => Promise<void> = async () => {
+    setIsLoaded(false)
+    setError(null)
     fetch(fixUrl(`/hamsters/cutest`))
       .then((res) => res.json())
       .then(
@@ -34,7 +33,6 @@ const Home = () => {
           if (result.length > 1) {
             let theCutestHamster =
               result[Math.floor(Math.random() * result.length)]
-            console.log(theCutestHamster)
             let theCutestArr: Hamster[] = []
             theCutestArr.push(theCutestHamster)
             setCutestHamster(theCutestArr)
@@ -42,9 +40,6 @@ const Home = () => {
             setCutestHamster(result)
           }
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           setIsLoaded(true)
           setError(error)
@@ -66,9 +61,6 @@ const Home = () => {
             setError(null)
             setHamsters(result)
           },
-          // Note: it's important to handle errors here
-          // instead of a catch() block so that we don't swallow
-          // exceptions from actual bugs in components.
           (error) => {
             setIsLoaded(true)
             setError(error)
@@ -81,14 +73,13 @@ const Home = () => {
   return (
     <>
       {error ? (
-        <div>
+        <div className="Home">
           Tyvärr, något gick snett. Vill du försöka hämta den bästa hamstern
-          igen?
-          <button onClick={getData}>Hämta igen!</button>
+          igen? <button onClick={getData}> Försök igen!</button>
         </div>
       ) : (
         <div className="Home">
-          <h1>#1 Ranked Hamster</h1>
+          <h1>#1 HAMSTER</h1>
 
           {cutestHamster ? (
             <div className="cutest-section">
@@ -101,7 +92,10 @@ const Home = () => {
               ))}
             </div>
           ) : (
-            <h2>We are currently loading...</h2>
+            <div className="cutest-section">
+              <div className="loader"></div>{' '}
+              <h2>Vi försöker just nu hämta den bästa hamstern...</h2>
+            </div>
           )}
           <div className="introduction">
             <section className="intro-links">
@@ -130,22 +124,30 @@ const Home = () => {
                 </Link>
               </span>
             </section>
-            <section>
+            <section className="intro-text">
+              <h2>Välkommen till Hamster-Wars</h2>
               <p>
-                This is Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Ullam quod dolores, non aperiam iusto quas maiores voluptas.
-                Corporis eaque inventore iste voluptatem quae ullam minima
-                tempore reprehenderit neque. Quia sit similique, quaerat
-                aspernatur facere repellendus itaque, laboriosam blanditiis
-                beatae non dolorum odit soluta sed accusamus exercitationem,
-                velit nostrum voluptatem suscipit! Temporibus, voluptas!
-                Consequatur aliquam iure sapiente architecto, quaerat tenetur at
-                adipisci quo in suscipit possimus nemo ex modi, ducimus magnam
-                magni laudantium maxime inventore. Voluptas officia corrupti
-                vitae voluptatem dolore adipisci quibusdam dicta! Harum
-                aspernatur inventore quas porro optio id nihil dicta, ipsum
-                error laborum quo voluptatem, sunt tempore nemo!
+                Hamster-Wars är ett spinoff projekt baserat på den tidigare
+                webbsidan Kittenwar. Appen går ut på att man kan b.la
               </p>
+              <ul>
+                <li>Rösta på den hamster du gillar bäst!</li>
+                <li>Lägg till din egen Hamster och tävla i Hamster-Wars!</li>
+                <li>Spana in alla olika hamstrar som finns under Galleriet.</li>
+                <li>
+                  Topp 5 lista under Statistik för både Vinnare och Förlorare.
+                </li>
+                <li>Hitta alla matcher och resultat under Historik.</li>
+                <li>Bli hyllad på första sidan om du är den bästa!</li>
+              </ul>
+              <p>
+                Det har varit regler och betygskrav som ligger till grund för
+                appens design och funktionalitet.
+              </p>
+              <section>
+                <h5>Arbetsverktyg:</h5>
+                <p>Express, Firestore, React, Typescript.</p>
+              </section>
             </section>
           </div>
         </div>
