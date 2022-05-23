@@ -47,10 +47,6 @@ const Home = () => {
       )
   }
 
-  function handleDeletes(value: boolean) {
-    getData()
-  }
-
   useEffect(() => {
     if (hamsters.length === 0) {
       fetch(fixUrl(`/hamsters`))
@@ -84,11 +80,7 @@ const Home = () => {
           {cutestHamster ? (
             <div className="cutest-section">
               {cutestHamster.map((hamster) => (
-                <GalleryHamster
-                  key={hamster.id}
-                  hamster={hamster}
-                  trackDeletes={handleDeletes}
-                />
+                <GalleryHamster key={hamster.id} hamster={hamster} />
               ))}
             </div>
           ) : (

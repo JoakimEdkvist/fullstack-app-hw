@@ -75,9 +75,7 @@ const GalleryHamster = ({ hamster }: Props) => {
     let newHamsters = hamsters?.filter(
       (hamster) => hamster.id !== HamsterToBeDeleted
     )
-    console.log(hamsters)
     setHamsters(newHamsters)
-    console.log(hamsters)
   }
   //
   return (

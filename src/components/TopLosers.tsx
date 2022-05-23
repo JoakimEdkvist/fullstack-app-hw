@@ -27,20 +27,12 @@ const TopLosers = () => {
     getData()
   }, [])
 
-  function handleDeletes(value: boolean) {
-    getData()
-  }
-
   return (
     <div>
       {hamsters ? (
         <div className="Grid">
           {hamsters.map((hamster) => (
-            <GalleryHamster
-              key={hamster.id}
-              hamster={hamster}
-              trackDeletes={handleDeletes}
-            />
+            <GalleryHamster key={hamster.id} hamster={hamster} />
           ))}
         </div>
       ) : (
