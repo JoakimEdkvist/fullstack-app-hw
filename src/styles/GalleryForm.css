@@ -2,7 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 270px;
+  /* min-width: 270px; */
+  max-width: 80%;
   margin-top: 10%;
   z-index: 9;
   border-radius: 25px;
@@ -15,21 +16,39 @@
   );
 }
 
+.GalleryForm .header {
+  text-align: center;
+}
+
+.GalleryForm .input-fields {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 680px;
+}
+
+.GalleryForm .input-fields label {
+  max-width: 250px;
+  margin: 8px;
+}
+
 .GalleryForm .form-container {
+  min-width: 80%;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   /* align-items: center; */
 }
 
 .cross {
   display: flex;
   justify-content: flex-end;
-  margin: 12px;
+  margin: 15px;
   cursor: pointer;
 }
 
 .GalleryForm input {
-  width: 200px;
+  min-width: 200px;
   box-shadow: 0 0 5px 5px;
   border-radius: 10px;
   font-family: monospace;
@@ -51,6 +70,7 @@
   font-style: italic;
   font-weight: 600;
   color: #bf2e2e;
+  height: 14px;
 }
 
 .GalleryForm .enabled-button {
@@ -87,4 +107,22 @@
   justify-content: center;
   align-items: center;
   border-radius: 0;
+}
+@media screen and (max-width: 800px) {
+  .GalleryForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 270px;
+    margin-top: 10%;
+    z-index: 9;
+    border-radius: 25px;
+    box-shadow: 0 0 5px 5px;
+    background: rgb(130, 178, 104);
+    background: linear-gradient(
+      254deg,
+      rgba(130, 178, 104, 1) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
 }

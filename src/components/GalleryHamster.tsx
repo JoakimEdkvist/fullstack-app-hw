@@ -83,7 +83,7 @@ const GalleryHamster = ({ hamster }: Props) => {
       <li key={hamster.id} className="item">
         <img
           onClick={hideorShow}
-          className="img"
+          className={isClicked ? 'img in-focus' : 'img'}
           src={fixImgSrcPath(hamster.imgName)}
           alt="hamster poster"
         />

@@ -13,6 +13,11 @@
   cursor: pointer;
 }
 
+.GalleryHamster .item .in-focus {
+  border: 5px solid rgb(4, 175, 243);
+  background-color: aliceblue;
+}
+
 .GalleryHamster .icon {
   cursor: pointer;
 }
