@@ -13,3 +13,10 @@ Hamster Wars is a spinoff on KittenWar and designed & built to fullfill certain 
 - (Back-end) Express
 - (Database) Firestore
 - (Front-end) React & Typescript
+
+### For Teacher
+
+**Level-Ups beyond "VG-krav"**
+- React Router
+- Animations with CSS & NPM package "react-spring"
+- Icons from NPM package "font-awesome"
